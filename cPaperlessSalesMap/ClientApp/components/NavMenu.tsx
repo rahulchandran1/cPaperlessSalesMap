@@ -1,7 +1,19 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { FormControl,FormControlLabel,Checkbox } from '@material-ui/core';
 
-export class NavMenu extends React.Component<{}, {}> {
+
+
+interface NavState {
+	ssrCustChecked:boolean
+}
+export class NavMenu extends React.Component<{}, NavState> {
+	constructor() {
+		super();
+		this.state = {
+			ssrCustChecked: false
+		}
+	}
     public render() {
         return <div className='main-nav'>
                 <div className='navbar navbar-inverse'>
@@ -19,22 +31,27 @@ export class NavMenu extends React.Component<{}, {}> {
                     <ul className='nav navbar-nav'>
                         <li>
                             <NavLink to={ '/' } exact activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span> Home
+                                <span className='glyphicon glyphicon-home'></span> cPaperless Customer Map
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to={ '/counter' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-education'></span> Counter
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={ '/fetchdata' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Fetch data
-                            </NavLink>
-                        </li>
-                    </ul>
+						
+						
+							
+						
+						
+					</ul>
+					<FormControlLabel
+						control={
+							<Checkbox name="SSRCustMap" checked={this.state.ssrCustChecked} onChange={this.handleIsHideTest} />
+						}
+						label="SSR Customers"
+					/>
                 </div>
             </div>
         </div>;
-    }
+	}
+
+	handleIsHideTest = (event: any) => {
+		this.setState({ ssrCustChecked: event.target.checked });
+	}
 }
